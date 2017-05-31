@@ -40,50 +40,24 @@ namespace Microsoft.Knowzy.OrdersAPI.Data
 
         public IEnumerable<Shipping> GetShippings()
         {
-            return _client.CreateDocumentQuery<Shipping>(
-                _ordersLink,
-                "SELECT * FROM orders o WHERE o.type='shipping'",
-                _options).ToList();
+            return GetOrders<Shipping>("shipping");
         }
 
         public Shipping GetShipping(string orderId)
         {
-            return _client.CreateDocumentQuery<Shipping>(
-                _ordersLink,
-                new SqlQuerySpec
-                {
-                    QueryText = "SELECT TOP 1 * FROM orders o WHERE (o.id = @orderid)",
-                    Parameters = new SqlParameterCollection()
-                    {
-                     new SqlParameter("@orderid", orderId)
-                    }
-                },
-                _options).ToList().FirstOrDefault();
+            return GetOrder<Shipping>(orderId);
         }
 
         public IEnumerable<Receiving> GetReceivings()
         {
-            return _client.CreateDocumentQuery<Receiving>(
-                _ordersLink,
-                "SELECT * FROM orders o WHERE o.type='receiving'",
-                _options).ToList();
+            return GetOrders<Receiving>("receiving");
         }
 
         public Receiving GetReceiving(string orderId)
         {
-            return _client.CreateDocumentQuery<Receiving>(
-                _ordersLink,
-                new SqlQuerySpec
-                {
-                    QueryText = "SELECT TOP 1 * FROM orders o WHERE (o.id = @orderid)",
-                    Parameters = new SqlParameterCollection()
-                    {
-                     new SqlParameter("@orderid", orderId)
-                    }
-                },
-                _options).ToList().FirstOrDefault();
+            return GetOrder<Receiving>(orderId);
         }
-        
+
         public async Task UpsertAsync(Order order)
         {
             await _client.UpsertDocumentAsync(_ordersLink.ToString(), order);
@@ -100,6 +74,36 @@ namespace Microsoft.Knowzy.OrdersAPI.Data
                     _ordersLink,
                     "SELECT o.postalCarrier.id, o.postalCarrier.name FROM orders o",
                     _options).ToList().GroupBy(x => x.Name).Select(x => x.First());
+        }
+
+        private IEnumerable<T> GetOrders<T>(string orderType)
+        {
+            return _client.CreateDocumentQuery<T>(
+                _ordersLink,
+                new SqlQuerySpec
+                {
+                    QueryText = "SELECT * FROM orders o WHERE (o.type = @ordertype)",
+                    Parameters = new SqlParameterCollection()
+                        {
+                                     new SqlParameter("@ordertype", orderType)
+                        }
+                },
+                _options).ToList();
+        }
+
+        private T GetOrder<T>(string orderId)
+        {
+            return _client.CreateDocumentQuery<T>(
+                    _ordersLink,
+                    new SqlQuerySpec
+                    {
+                        QueryText = "SELECT TOP 1 * FROM orders o WHERE (o.id = @orderid)",
+                        Parameters = new SqlParameterCollection()
+                        {
+                                     new SqlParameter("@orderid", orderId)
+                        }
+                    },
+                    _options).ToList().FirstOrDefault();
         }
 
         private bool disposedValue = false; // To detect redundant calls
