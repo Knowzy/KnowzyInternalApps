@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  microsoft.knowzy.webapp:
+    image: microsoft.knowzy.webapp
+    build:
+      context: ./src/1. WebApp/Microsoft.Knowzy.WebApp
+      dockerfile: Dockerfile
+
+  microsoft.knowzy.ordersapi:
+    image: microsoft.knowzy.ordersapi
+    build:
+      context: ./src/2. Services/APIs/Microsoft.Knowzy.OrdersAPI
+      dockerfile: Dockerfile
+
+  microsoft.knowzy.productsapi:
+    image: microsoft.knowzy.productsapi
+    build:
+      context: ./src/2. Services/APIs/Microsoft.Knowzy.ProductsAPI
+      dockerfile: Dockerfile

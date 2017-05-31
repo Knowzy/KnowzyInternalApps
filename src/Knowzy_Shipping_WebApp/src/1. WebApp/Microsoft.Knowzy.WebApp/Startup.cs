@@ -38,13 +38,13 @@ namespace Microsoft.Knowzy.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureCommonServices(services);
-            services.AddSingleton<IOrderRepository, OrderRepositoryMock>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
         }
 
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             ConfigureCommonServices(services);            
-            services.AddSingleton<IOrderRepository, OrderRepositoryMock>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
         }       
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

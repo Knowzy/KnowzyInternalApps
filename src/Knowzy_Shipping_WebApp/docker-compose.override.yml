@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  microsoft.knowzy.webapp:
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=http://0.0.0.0:5101
+     - ORDERSAPI_URL=http://microsoft.knowzy.ordersapi:5102
+     - PRODUCTSAPI_URL=http://microsoft.knowzy.productsapi:5103
+    ports:
+      - "5101:5101"
+
+  microsoft.knowzy.ordersapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:5102
+      - COSMOSDB_ENDPOINT=<**YOUR COSMOSDB ENDPOINT**>
+      - COSMOSDB_KEY=<**YOUR KEY**>
+    ports:
+      - "5102:5102"
+
+  microsoft.knowzy.productsapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:5103
+      - COSMOSDB_ENDPOINT=<**YOUR COSMOSDB ENDPOINT**>
+      - COSMOSDB_KEY=<**YOUR KEY**>
+    ports:
+      - "5103:5103"

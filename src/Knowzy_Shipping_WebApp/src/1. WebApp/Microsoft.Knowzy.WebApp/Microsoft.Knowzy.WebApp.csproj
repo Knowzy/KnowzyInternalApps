@@ -6,15 +6,12 @@
 
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\netcoreapp1.1\netcoreapp1.1\netcoreapp1.1\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Properties\PublishProfiles\KnowzyWA - Web Deploy.pubxml" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="wwwroot\css\detail.css" />
@@ -43,7 +40,6 @@
     <Content Include="wwwroot\images\trash.svg" />
     <Content Include="wwwroot\images\X.svg" />
     <Content Include="wwwroot\images\yellow.png" />
-    <Content Include="wwwroot\js\pwabuilder-sw.js" />
     <Content Include="wwwroot\lib\bootstrap\.bower.json" />
     <Content Include="wwwroot\lib\bootstrap\bower.json" />
     <Content Include="wwwroot\lib\bootstrap\CHANGELOG.md" />
@@ -414,7 +410,6 @@
     <Content Include="wwwroot\lib\jquery\src\var\support.js" />
     <Content Include="wwwroot\lib\jquery\src\var\toString.js" />
     <Content Include="wwwroot\lib\jquery\src\wrap.js" />
-    <Content Include="wwwroot\pwabuilder-sw.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
@@ -435,7 +430,6 @@
     <ProjectReference Include="..\..\2. Services\Repositories\Microsoft.Knowzy.Repositories.Core\Microsoft.Knowzy.Repositories.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
