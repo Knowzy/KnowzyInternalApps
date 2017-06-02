@@ -34,7 +34,7 @@ namespace Microsoft.Knowzy.OrdersAPI.Controllers
         }
 
         // GET api/Receiving/5
-        [HttpGet("{orderId}")]
+        [HttpGet("{orderId}", Name = "GetReceiving")]
         public Receiving GetReceiving(string orderId)
         {
             return _ordersStore.GetReceiving(orderId);
@@ -51,7 +51,7 @@ namespace Microsoft.Knowzy.OrdersAPI.Controllers
 
             await _ordersStore.UpsertAsync(order);
 
-            return CreatedAtRoute("Create", new { id = order.Id });
+            return CreatedAtRoute("GetReceiving", new { orderId = order.Id }, order);
         }
 
         // PUT

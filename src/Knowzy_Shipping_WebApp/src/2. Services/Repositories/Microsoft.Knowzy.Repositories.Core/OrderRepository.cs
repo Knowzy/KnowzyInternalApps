@@ -179,8 +179,9 @@ namespace Microsoft.Knowzy.Repositories.Core
             shipping.Type = "shipping";
             var postalCarrier = await GetPostalCarrierAsync(shipping.PostalCarrierId);
             shipping.PostalCarrier = postalCarrier;
-            var shippingStr = JsonConvert.SerializeObject(shipping, jsonSettings).ToString();
-            HttpResponseMessage res = await _orderClient.PostAsync("/api/Shipping", new StringContent(shippingStr));
+            var stringData = JsonConvert.SerializeObject(shipping, jsonSettings);
+            var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage res = await _orderClient.PostAsync("/api/Shipping", contentData);
             res.EnsureSuccessStatusCode();
         }
 
@@ -201,8 +202,9 @@ namespace Microsoft.Knowzy.Repositories.Core
             receiving.Type = "receiving";
             var postalCarrier = await GetPostalCarrierAsync(receiving.PostalCarrierId);
             receiving.PostalCarrier = postalCarrier;
-            var receivingStr = JsonConvert.SerializeObject(receiving, jsonSettings).ToString();
-            HttpResponseMessage res = await _orderClient.PostAsync("/api/Receiving", new StringContent(receivingStr));
+            var stringData = JsonConvert.SerializeObject(receiving, jsonSettings);
+            var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage res = await _orderClient.PostAsync("/api/Receiving", contentData);
             res.EnsureSuccessStatusCode();
         }
 

@@ -33,7 +33,7 @@ namespace Microsoft.Knowzy.OrdersAPI.Controllers
         }
 
         // GET api/Shipping/5
-        [HttpGet("{orderId}")]
+        [HttpGet("{orderId}", Name = "GetShipping")]
         public Domain.Shipping GetShipping(string orderId)
         {
             return _ordersStore.GetShipping(orderId);
@@ -50,7 +50,7 @@ namespace Microsoft.Knowzy.OrdersAPI.Controllers
 
             await _ordersStore.UpsertAsync(order);
 
-            return CreatedAtRoute("Create", new { id = order.Id });
+            return CreatedAtRoute("GetShipping", new { orderId = order.Id }, order);
         }
 
         // PUT
