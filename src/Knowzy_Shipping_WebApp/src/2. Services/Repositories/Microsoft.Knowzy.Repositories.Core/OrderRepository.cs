@@ -26,6 +26,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft​.Extensions​.Caching​.Memory;
 
 namespace Microsoft.Knowzy.Repositories.Core
 {
@@ -35,15 +36,18 @@ namespace Microsoft.Knowzy.Repositories.Core
         private readonly IMapper _mapper;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IConfiguration _configuration;
+        private IEnumerable<PostalCarrier> _postalCarriers;
+        private IMemoryCache _cache;
         private HttpClient _orderClient;
         private HttpClient _productClient;
         private JsonSerializerSettings jsonSettings;
 
-        public OrderRepository(IMapper mapper, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
+        public OrderRepository(IMapper mapper, IHostingEnvironment hostingEnvironment, IConfiguration configuration, IMemoryCache memoryCache)
         {
             _mapper = mapper;
             _hostingEnvironment = hostingEnvironment;
             _configuration = configuration;
+            _cache = memoryCache;
 
             _orderClient = new HttpClient();
             _orderClient.BaseAddress = new Uri(_configuration["ORDERSAPI_URL"]); //ENV var passed in via Docker-Compose override or Kubernetes
@@ -120,8 +124,29 @@ namespace Microsoft.Knowzy.Repositories.Core
 
         public async Task<IEnumerable<PostalCarrier>> GetPostalCarriers()
         {
-            var postalcarriers = JsonConvert.DeserializeObject<IEnumerable<PostalCarrier>>(await _orderClient.GetStringAsync("/api/PostalCarrier"), jsonSettings);
-            return _mapper.Map<IEnumerable<PostalCarrier>>(postalcarriers);
+            IEnumerable<PostalCarrier> postalCarriers;
+            bool exists = _cache.TryGetValue("postalcarriers", out postalCarriers);
+            if (!exists)
+            {
+                _postalCarriers = JsonConvert.DeserializeObject<IEnumerable<PostalCarrier>>(await _orderClient.GetStringAsync("/api/PostalCarrier"), jsonSettings);
+                //expire postal carrier list after a day
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromDays(1));
+
+                _cache.Set("postalcarriers", _postalCarriers, cacheEntryOptions);
+            }
+            else
+            {
+                _postalCarriers = postalCarriers;
+            }
+            
+            return _mapper.Map<IEnumerable<PostalCarrier>>(_postalCarriers);
+        }
+
+        private async Task<PostalCarrier> GetPostalCarrierAsync(int postalCarrierId)
+        {
+            var postalCarriers = await GetPostalCarriers();
+            return postalCarriers.Where(p => p.Id == postalCarrierId).FirstOrDefault();
         }
 
         public async Task<IEnumerable<Customer>> GetCustomers()
@@ -151,6 +176,9 @@ namespace Microsoft.Knowzy.Repositories.Core
         public async Task AddShipping(Shipping shipping)
         {
             shipping.Id = OrderRepositoryHelper.GenerateString(10);
+            shipping.Type = "shipping";
+            var postalCarrier = await GetPostalCarrierAsync(shipping.PostalCarrierId);
+            shipping.PostalCarrier = postalCarrier;
             var shippingStr = JsonConvert.SerializeObject(shipping, jsonSettings).ToString();
             HttpResponseMessage res = await _orderClient.PostAsync("/api/Shipping", new StringContent(shippingStr));
             res.EnsureSuccessStatusCode();
@@ -158,6 +186,9 @@ namespace Microsoft.Knowzy.Repositories.Core
 
         public async Task UpdateShipping(Shipping shipping)
         {
+            shipping.Type = "shipping";
+            var postalCarrier = await GetPostalCarrierAsync(shipping.PostalCarrierId);
+            shipping.PostalCarrier = postalCarrier;
             var stringData = JsonConvert.SerializeObject(shipping, jsonSettings);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage res = await _orderClient.PutAsync($"/api/Shipping/{shipping.Id}", contentData);
@@ -167,6 +198,9 @@ namespace Microsoft.Knowzy.Repositories.Core
         public async Task AddReceiving(Receiving receiving)
         {
             receiving.Id = OrderRepositoryHelper.GenerateString(10);
+            receiving.Type = "receiving";
+            var postalCarrier = await GetPostalCarrierAsync(receiving.PostalCarrierId);
+            receiving.PostalCarrier = postalCarrier;
             var receivingStr = JsonConvert.SerializeObject(receiving, jsonSettings).ToString();
             HttpResponseMessage res = await _orderClient.PostAsync("/api/Receiving", new StringContent(receivingStr));
             res.EnsureSuccessStatusCode();
@@ -174,6 +208,9 @@ namespace Microsoft.Knowzy.Repositories.Core
 
         public async Task UpdateReceiving(Receiving receiving)
         {
+            receiving.Type = "receiving";
+            var postalCarrier = await GetPostalCarrierAsync(receiving.PostalCarrierId);
+            receiving.PostalCarrier = postalCarrier;
             var stringData = JsonConvert.SerializeObject(receiving, jsonSettings);
             var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage res = await _orderClient.PutAsync($"/api/Receiving/{receiving.Id}", contentData);

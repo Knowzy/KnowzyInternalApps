@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.Knowzy.ProductsAPI
 {
@@ -57,6 +58,7 @@ namespace Microsoft.Knowzy.ProductsAPI
             {
                 return new JsonSerializerSettings
                 {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     MissingMemberHandling = MissingMemberHandling.Ignore,
                     NullValueHandling = NullValueHandling.Ignore
                 };

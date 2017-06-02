@@ -76,7 +76,7 @@ namespace Microsoft.Knowzy.WebApp
         {
             services.AddMvc();
             services.AddAutoMapper();
-
+            services.AddMemoryCache();
             services.AddSingleton<IConfiguration>(Configuration);
         }
     }
