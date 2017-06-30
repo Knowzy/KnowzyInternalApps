@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.0.2" />
-    <PackageReference Include="FluentValidation" Version="7.0.0-beta3" />
+    <PackageReference Include="FluentValidation" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
