@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Knowzy.Std.Common\Microsoft.Knowzy.Std.Common.csproj" />
+    <ProjectReference Include="..\Microsoft.Knowzy.Std.DAL\Microsoft.Knowzy.Std.DAL.csproj" />
+    <ProjectReference Include="..\Microsoft.Knowzy.Std.Domain\Microsoft.Knowzy.Std.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions">
+      <HintPath>..\..\ReferencedAssemblies\System.Data.DataSetExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

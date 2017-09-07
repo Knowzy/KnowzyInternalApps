@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="Microsoft.Knowzy.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Microsoft.Knowzy.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwptkControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:telerikGrid="using:Telerik.UI.Xaml.Controls.Grid"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <uwptkControls:Menu x:Name="TopMenu" AllowTooltip="True" Orientation="Horizontal">
+            <uwptkControls:MenuItem Header="File">
+                <MenuFlyoutItem x:Name="NewInventoryButton" uwptkControls:Menu.InputGestureText="Ctrl+Shift+N" Text="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
+            </uwptkControls:MenuItem>
+        </uwptkControls:Menu>
+
+        <telerikGrid:RadDataGrid x:Name="dataGridInventory" RelativePanel.Below="TopMenu" SelectionMode="Single" SelectionChanged="dataGridInventory_SelectionChanged" />
+
+    </RelativePanel>
+</Page>
