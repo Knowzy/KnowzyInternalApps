@@ -1,5 +1,7 @@
 ﻿using Microsoft.Knowzy.Domain.Enums;
 using Microsoft.Knowzy.NET.BLL;
+using Microsoft.Knowzy.UWP.Services;
+using Microsoft.Knowzy.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +27,8 @@ namespace Microsoft.Knowzy.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private EditItemViewModel _editItemViewModel;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -40,10 +44,19 @@ namespace Microsoft.Knowzy.UWP
 
         private async void NewInventoryButton_Click(object sender, RoutedEventArgs e)
         {
+            _editItemViewModel = new ViewModels.EditItemViewModel
+            {
+                Id = "NewUserId",
+                Name = "New Name",
+                Notes = "New Notes"
+            };
+
             var editItemView = new EditItemView
             {
-                EditItemViewModel = new ViewModels.EditItemViewModel()
+                EditItemViewModel = _editItemViewModel
             };
+
+            await UserActivityService.Current.RecordInventoryUserActivity(_editItemViewModel);
 
             await editItemView.ShowAsync();
         }
@@ -54,24 +67,57 @@ namespace Microsoft.Knowzy.UWP
 
             if (selectedInventory != null)
             {
+                _editItemViewModel = new ViewModels.EditItemViewModel
+                {
+                    Id = selectedInventory.Id,
+                    Engineer = selectedInventory.Engineer,
+                    Name = selectedInventory.Name,
+                    RawMaterial = selectedInventory.RawMaterial,
+                    DevelopmentStatus = Enum.Parse<DevelopmentStatus>(selectedInventory.Status, true),
+                    DevelopmentStartDate = selectedInventory.DevelopmentStartDate,
+                    ExpectedCompletionDate = selectedInventory.ExpectedCompletionDate,
+                    Notes = selectedInventory.Notes,
+                    ImageSource = selectedInventory.ImageSource
+                };
+
                 var editItemView = new EditItemView
                 {
-                    EditItemViewModel = new ViewModels.EditItemViewModel
-                    {
-                        Id = selectedInventory.Id,
-                        Engineer = selectedInventory.Engineer,
-                        Name = selectedInventory.Name,
-                        RawMaterial = selectedInventory.RawMaterial,
-                        DevelopmentStatus = Enum.Parse<DevelopmentStatus>(selectedInventory.Status,true),
-                        DevelopmentStartDate = selectedInventory.DevelopmentStartDate,
-                        ExpectedCompletionDate = selectedInventory.ExpectedCompletionDate,
-                        Notes = selectedInventory.Notes,
-                        ImageSource = selectedInventory.ImageSource
-                    }
+                    EditItemViewModel = _editItemViewModel
                 };
+
+                await UserActivityService.Current.RecordInventoryUserActivity(_editItemViewModel);
 
                 await editItemView.ShowAsync();
             }
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            
+            var parameters = e.Parameter.ToString().Split("id=");
+
+            if (parameters.Length <= 1) return;
+
+            bool isNewItem = false;
+
+            InventoryRow row = null;
+
+            if (!isNewItem)
+            {
+                row = InventoryBLL.Current.GetInventory().FindById(parameters[1]);
+            }
+
+            isNewItem = (row == null);
+
+            _editItemViewModel = new EditItemViewModel();
+
+            var editItemView = new EditItemView
+            {
+                EditItemViewModel = _editItemViewModel
+            };
+
+            await editItemView.ShowAsync();
         }
     }
 }

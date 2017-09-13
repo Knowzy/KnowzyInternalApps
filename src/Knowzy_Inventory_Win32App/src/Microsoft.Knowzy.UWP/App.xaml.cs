@@ -73,6 +73,31 @@ namespace Microsoft.Knowzy.UWP
             }
         }
 
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                Window.Current.Content = rootFrame;
+            }
+
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                var uriArgs = args as ProtocolActivatedEventArgs;
+
+                if (uriArgs != null)
+                {
+                    rootFrame.Navigate(typeof(MainPage), uriArgs.Uri.Query);
+                }
+            }
+
+            Window.Current.Activate();
+        }
+
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>
