@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01EF3CFF-D354-4B3F-B4B3-CA1863CCD686}</ProjectGuid>
+    <ProjectGuid>{E0189A9C-7BC9-4D1B-9350-35D8B3183B09}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Knowzy.ConfigurationService</RootNamespace>

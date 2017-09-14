@@ -101,20 +101,32 @@ namespace Microsoft.Knowzy.UWP
 
             bool isNewItem = false;
 
-            InventoryRow row = null;
+            InventoryRow inventoryRow = null;
 
             if (!isNewItem)
             {
-                row = InventoryBLL.Current.GetInventory().FindById(parameters[1]);
+                inventoryRow = InventoryBLL.Current.GetInventory().FindById(parameters[1]);
             }
 
-            isNewItem = (row == null);
+            isNewItem = (inventoryRow == null);
 
             _editItemViewModel = new EditItemViewModel();
 
+            if (!isNewItem && inventoryRow != null)
+            {
+                _editItemViewModel.Id = inventoryRow.Id;
+                _editItemViewModel.Engineer = inventoryRow.Engineer;
+                _editItemViewModel.Name = inventoryRow.Name;
+                _editItemViewModel.RawMaterial = inventoryRow.RawMaterial;
+                _editItemViewModel.DevelopmentStartDate = inventoryRow.DevelopmentStartDate;
+                _editItemViewModel.ExpectedCompletionDate = inventoryRow.ExpectedCompletionDate;
+                _editItemViewModel.Notes = inventoryRow.Notes;
+                _editItemViewModel.ImageSource = inventoryRow.ImageSource;
+            }
+
             var editItemView = new EditItemView
             {
-                EditItemViewModel = _editItemViewModel
+                EditItemViewModel = _editItemViewModel,
             };
 
             await editItemView.ShowAsync();

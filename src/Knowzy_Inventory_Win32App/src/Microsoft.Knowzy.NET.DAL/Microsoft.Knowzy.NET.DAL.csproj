@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B0985E3-3FA3-478B-8F33-E8F224778BF9}</ProjectGuid>
+    <ProjectGuid>{F9A6B1C9-3D5F-4157-B083-44EECD4FF2D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Knowzy.NET.DAL</RootNamespace>
