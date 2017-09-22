@@ -31,7 +31,7 @@ namespace Microsoft.Knowzy.UWP.Services
 
             if (userActivity.State == UserActivityState.New)
             {
-                userActivity.ActivationUri = new Uri($"knowzyinventory:{APP_ITEM_REDIRECT}{editItemViewModel.Id}");
+                userActivity.ActivationUri = new Uri($"knowzyinventory:{activityId}");
 
                 userActivity.VisualElements.DisplayText = editItemViewModel.Name;
                 userActivity.VisualElements.Description = editItemViewModel.Notes;

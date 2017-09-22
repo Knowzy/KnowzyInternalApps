@@ -53,7 +53,8 @@ namespace Microsoft.Knowzy.Xamarin.Services
             HistoryItem historyItem = new HistoryItem
             {
                 StartedDateTime = DateTime.UtcNow,
-                LastActiveDateTime = DateTime.UtcNow
+                //LastActiveDateTime = DateTime.UtcNow,
+                UserTimezone = "America/Los_Angeles"
             };
 
             string historyUrlWithId = string.Concat(activitiesUrl, "/", activityEndPointId, "/historyItems/", historyId);
