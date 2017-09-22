@@ -12,6 +12,8 @@
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    PrimaryButtonStyle="{StaticResource NewOrderButtonStyle}"
+    SecondaryButtonStyle="{StaticResource NewOrderButtonStyle}"
     Background="{ThemeResource NewOrderAcrylicBrush}">
     <Grid>
         <ScrollViewer x:Name="FormScrollViewer" Background="Transparent">

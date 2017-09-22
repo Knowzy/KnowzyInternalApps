@@ -25,6 +25,12 @@ namespace Microsoft.Knowzy.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                ServeUnknownFileTypes = true,
+                DefaultContentType = "text/plain"
+            });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");

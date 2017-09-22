@@ -26,8 +26,8 @@ namespace Microsoft.Knowzy.Xamarin.Model
         // required
         public DateTimeOffset StartedDateTime { get; set; }
 
-        //// optional
-        //public DateTimeOffset LastActiveDateTime { get; set; }
+        // optional
+        public DateTimeOffset LastActiveDateTime { get; set; }
 
         public string UserTimezone { get; set; }
 

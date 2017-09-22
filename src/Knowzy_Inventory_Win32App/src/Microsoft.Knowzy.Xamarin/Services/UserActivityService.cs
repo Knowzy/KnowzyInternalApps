@@ -18,8 +18,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
 {
     public class UserActivityService
     {
-        private const string WEB_ROOT = "https://github.com/Knowzy/KnowzyInternalApps/";
-        private const string WEB_ASSETS_ROOT = "https://github.com/Knowzy/KnowzyInternalApps/tree/master/src/Knowzy_Engineering_Win32App/src/Microsoft.Knowzy.WPF/Assets/";
+        private const string WEB_ROOT = "https://microsoftknowzyweb20170922113924.azurewebsites.net";
         private const string APP_ITEM_REDIRECT = "item?id=";
 
         private UserActivityService()
@@ -53,7 +52,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
             HistoryItem historyItem = new HistoryItem
             {
                 StartedDateTime = DateTime.UtcNow,
-                //LastActiveDateTime = DateTime.UtcNow,
+                LastActiveDateTime = DateTime.UtcNow,
                 UserTimezone = "America/Los_Angeles"
             };
 

@@ -7,6 +7,13 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Style x:Key="NewOrderButtonStyle" TargetType="Button">
+                        <Setter Property="Background" Value="IndianRed" />
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <AcrylicBrush x:Key="MainAcrylicBrush"
