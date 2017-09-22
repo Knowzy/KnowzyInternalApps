@@ -8,16 +8,15 @@
     xmlns:uwptkControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:telerikGrid="using:Telerik.UI.Xaml.Controls.Grid"
     mc:Ignorable="d">
-
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <uwptkControls:Menu x:Name="TopMenu" AllowTooltip="True" Orientation="Horizontal">
-            <uwptkControls:MenuItem Header="File">
+    <RelativePanel Background="{ThemeResource MainAcrylicBrush}">
+        
+        <uwptkControls:Menu x:Name="TopMenu" AllowTooltip="True" Orientation="Horizontal" Margin="0,35,0,0">
+            <uwptkControls:MenuItem Header="File" Foreground="White">
                 <MenuFlyoutItem x:Name="NewInventoryButton" uwptkControls:Menu.InputGestureText="Ctrl+Shift+N" Text="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
             </uwptkControls:MenuItem>
         </uwptkControls:Menu>
 
         <telerikGrid:RadDataGrid x:Name="dataGridInventory" RelativePanel.Below="TopMenu" SelectionMode="Single" SelectionChanged="dataGridInventory_SelectionChanged" />
-
+        
     </RelativePanel>
 </Page>

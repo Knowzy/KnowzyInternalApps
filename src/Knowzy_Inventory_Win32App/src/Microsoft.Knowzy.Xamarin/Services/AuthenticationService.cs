@@ -13,8 +13,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
     public class AuthenticationService
     {
         public string TokenForUser = null;
-        private static DateTimeOffset expiration;
-        private static GraphServiceClient _graphClient = null;
+        private static DateTimeOffset expiration;       
 
         private AuthenticationService()
         {
@@ -25,26 +24,23 @@ namespace Microsoft.Knowzy.Xamarin.Services
 
         public static AuthenticationService Current => current ?? (current = new AuthenticationService());
 
-        public GraphServiceClient GetAuthenticatedClient()
+        public void InitAuthenticatedClient()
         {
-            if (_graphClient == null)
+            if (App.GraphClient == null)
             {
                 try
                 {
-                    _graphClient = new GraphServiceClient("https://graph.microsoft.com/v1.0", new DelegateAuthenticationProvider(
+                    App.GraphClient = new GraphServiceClient(Constants.GRAPH_BASE_URI, new DelegateAuthenticationProvider(
                             async (requestMessage) => {
                                 var token = await GetTokenForUserAsync();
-                                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+                                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
                             }));
-                    return _graphClient;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Could not create a graph client: " + ex.Message);
                 }
             }
-
-            return _graphClient;
         }
 
         public async Task<string> GetTokenForUserAsync()
@@ -65,7 +61,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
             {
                 App.PCA.Remove(user);
             }
-            _graphClient = null;
+            App.GraphClient = null;
             TokenForUser = null;
         }
     }

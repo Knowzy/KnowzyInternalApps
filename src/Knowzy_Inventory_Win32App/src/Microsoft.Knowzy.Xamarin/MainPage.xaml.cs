@@ -18,8 +18,6 @@ namespace Microsoft.Knowzy.Xamarin
 {
     public partial class MainPage : ContentPage
     {
-        private static GraphServiceClient _graphClient = null;
-
         public MainPage()
         {
             InitializeComponent();
@@ -32,17 +30,17 @@ namespace Microsoft.Knowzy.Xamarin
             slLoggedIn.IsVisible = false;
         }
 
-        private void InventoryList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void InventoryList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            UserActivityService.Current.RecordInventoryUserActivity(e.SelectedItem as InventoryModel);
+            await UserActivityService.Current.RecordInventoryUserActivityAsync(e.SelectedItem as InventoryModel);
         }
 
         private async void btnSignInSignOut_Clicked(object sender, EventArgs e)
         {
             if (btnSignInSignOut.Text == "Sign In")
             {
-                _graphClient = AuthenticationService.Current.GetAuthenticatedClient();
-                var currentUserObject = await _graphClient.Me.Request().GetAsync();
+                AuthenticationService.Current.InitAuthenticatedClient();
+                var currentUserObject = await App.GraphClient.Me.Request().GetAsync();
                 lblUserName.Text = App.Username = currentUserObject.DisplayName;
                 slLoggedIn.IsVisible = true;
                 btnSignInSignOut.Text = "Sign Out";

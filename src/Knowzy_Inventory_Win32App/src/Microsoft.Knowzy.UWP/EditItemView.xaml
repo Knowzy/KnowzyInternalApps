@@ -11,10 +11,10 @@
     PrimaryButtonText="Save"
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
-
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    Background="{ThemeResource NewOrderAcrylicBrush}">
     <Grid>
-        <ScrollViewer>
+        <ScrollViewer x:Name="FormScrollViewer" Background="Transparent">
             <telerikData:RadDataForm x:Name="InventoryDataForm" Item="{x:Bind EditItemViewModel, Mode=TwoWay}" />
         </ScrollViewer>
     </Grid>

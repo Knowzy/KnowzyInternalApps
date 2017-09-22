@@ -5,4 +5,46 @@
     xmlns:local="using:Microsoft.Knowzy.UWP"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush x:Key="MainAcrylicBrush"
+                        BackgroundSource="HostBackdrop"
+                        TintColor="IndianRed"
+                        TintOpacity="0.8"
+                        FallbackColor="IndianRed"/>
+
+                    <AcrylicBrush x:Key="NewOrderAcrylicBrush"
+                        BackgroundSource="Backdrop"
+                        TintColor="IndianRed"
+                        TintOpacity="0.01"
+                        FallbackColor="IndianRed"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="MainAcrylicBrush"
+                        Color="{ThemeResource SystemColorWindowColor}"/>
+
+                    <SolidColorBrush x:Key="NewOrderAcrylicBrush"
+                        Color="{ThemeResource SystemColorWindowColor}"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush x:Key="MainAcrylicBrush"
+                        BackgroundSource="HostBackdrop"
+                        TintColor="IndianRed"
+                        TintOpacity="0.8"
+                        FallbackColor="IndianRed"/>
+
+                    <AcrylicBrush x:Key="NewOrderAcrylicBrush"
+                        BackgroundSource="Backdrop"
+                        TintColor="IndianRed"
+                        TintOpacity="0.01"
+                        FallbackColor="IndianRed"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
 </Application>

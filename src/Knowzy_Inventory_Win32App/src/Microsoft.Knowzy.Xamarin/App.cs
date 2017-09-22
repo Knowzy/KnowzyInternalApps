@@ -1,4 +1,5 @@
-﻿using Microsoft.Identity.Client;
+﻿using Microsoft.Graph;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace Microsoft.Knowzy.Xamarin
     {
         public static PublicClientApplication PCA = null;
         public static string ClientID = "1ada69dc-9e00-482f-9f29-769d89dd1e78";
-        public static string[] Scopes = { "User.Read" };
+        public static string[] Scopes = { "User.Read UserTimelineActivity.Write.CreatedByApp" };
         public static string Username = string.Empty;
 
         public static UIParent UiParent = null;
 
-      
+        public static GraphServiceClient GraphClient = null;
 
         public App()
         {

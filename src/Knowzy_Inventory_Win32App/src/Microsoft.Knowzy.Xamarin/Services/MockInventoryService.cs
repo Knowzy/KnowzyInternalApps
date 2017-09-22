@@ -20,11 +20,11 @@ namespace Microsoft.Knowzy.Xamarin.Services
         {
             _inventoryList = new List<InventoryModel>
             {
-                new InventoryModel { InventoryId = "1", Engineer = "aaa", Name = "name1", RawMaterial = "" },
-                new InventoryModel { InventoryId = "2", Engineer = "bbb", Name = "name2", RawMaterial = "" },
-                new InventoryModel { InventoryId = "3", Engineer = "ccc", Name = "name3", RawMaterial = "" },
-                new InventoryModel { InventoryId = "4", Engineer = "ddd", Name = "name4", RawMaterial = "" },
-                new InventoryModel { InventoryId = "5", Engineer = "eee", Name = "name5", RawMaterial = "" }
+                new InventoryModel { InventoryId = "12358132", Engineer = "Ryan Drescher", Name = "Purple nose", RawMaterial = "Purple foam" },
+                new InventoryModel { InventoryId = "12358134", Engineer = "Russel Peters", Name = "Patch Adams", RawMaterial = "Red foam" },
+                new InventoryModel { InventoryId = "PN3476", Engineer = "Steve Jacobs", Name = "Fabric printed nose", RawMaterial = "Fabric with prints" },
+                new InventoryModel { InventoryId = "RN3454", Engineer = "Russel Peters", Name = "Black Nose", RawMaterial = "Black foam" },
+                new InventoryModel { InventoryId = "RN3456", Engineer = "Jane Smith", Name = "Deluxe Nose", RawMaterial = "Johan Harris" }
             };
         }
 
