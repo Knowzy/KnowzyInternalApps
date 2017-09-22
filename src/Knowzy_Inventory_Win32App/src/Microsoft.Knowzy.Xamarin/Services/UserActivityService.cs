@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.Knowzy.Xamarin.Model.Activity;
 
 namespace Microsoft.Knowzy.Xamarin.Services
 {
@@ -29,7 +30,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
 
         public static UserActivityService Current => current ?? (current = new UserActivityService());
 
-        public async Task RecordInventoryUserActivityAsync(InventoryModel model)
+        public async Task<string> RecordInventoryUserActivityAsync(InventoryModel model)
         {
             var appActivityId = string.Concat(APP_ITEM_REDIRECT, model.InventoryId);
 
@@ -44,14 +45,20 @@ namespace Microsoft.Knowzy.Xamarin.Services
             string activitiesUrl = App.GraphClient.Me.AppendSegmentToRequestUrl("activities");
             string activitiesUrlWithId = string.Concat(activitiesUrl, "/", WebUtility.UrlEncode(model.InventoryId));
 
-            HttpResponseMessage response = await CreateOrUpdateActivity(activity, activitiesUrlWithId);
-            var jsonResultString = await response.Content.ReadAsStringAsync();
+            var status = await CreateOrUpdateActivity(activity, activitiesUrlWithId);
             
-            Debug.WriteLine(model.Name);
-
+            switch(status)
+            {
+                case HttpStatusCode.OK:
+                    return $"Activity Updated for {model.Name}.";
+                case HttpStatusCode.Created:
+                    return $"Activity Created for {model.Name}.";
+                default:
+                    return $"Unknown or failed activity request for {model.Name}.";
+            }
         }
 
-        private async Task<HttpResponseMessage> CreateOrUpdateActivity(Activity activity, string activitiesUrlWithId)
+        private async Task<HttpStatusCode> CreateOrUpdateActivity(Activity activity, string activitiesUrlWithId)
         {
             List<Activity> list = new List<Activity>();
             list.Add(activity);
@@ -60,40 +67,15 @@ namespace Microsoft.Knowzy.Xamarin.Services
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver(), NullValueHandling = NullValueHandling.Ignore };
             string activityJson = JsonConvert.SerializeObject(list, settings);
             var stringContent = new StringContent(activityJson, Encoding.UTF8, "text/json");
-            
-            //request.Content = stringContent;
-            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Current.TokenForUser);
 
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Current.TokenForUser);
+            request.Content = stringContent;
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Current.TokenForUser);
 
-            try
-            {
-                return await client.PutAsync(activitiesUrlWithId, stringContent);
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            var response = await App.GraphClient.HttpProvider.SendAsync(request);
 
-            //var response = await App.GraphClient.HttpProvider.SendAsync(request);
-            return null;
+            response.EnsureSuccessStatusCode();
+
+            return response.StatusCode;
         }
-
-        //public async Task RecordInventoryUserActivity(EditItemViewModel editItemViewModel)
-        //{
-        //    UserActivityChannel channel = UserActivityChannel.GetDefault();
-        //    string activityId = string.Concat(APP_ITEM_REDIRECT, editItemViewModel.Id);
-
-        //    UserActivity userActivity = await channel.GetOrCreateUserActivityAsync(activityId);
-
-        //    if (userActivity.State == UserActivityState.New)
-        //    {
-        //        userActivity.ActivationUri = new Uri($"knowzyinventory:{APP_ITEM_REDIRECT}{editItemViewModel.Id}");
-        //        userActivity.VisualElements.DisplayText = editItemViewModel.Name;
-        //        userActivity.VisualElements.Description = editItemViewModel.Notes;
-        //        await userActivity.SaveAsync();
-        //    }
-        //}
     }
 }

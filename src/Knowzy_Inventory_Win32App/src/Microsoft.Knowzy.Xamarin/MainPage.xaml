@@ -8,29 +8,27 @@
         <StackLayout>
             
             <Label Text="Knowzy Mobile - Inventory" VerticalOptions="Start" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
-            
-            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
 
-            <StackLayout x:Name="slLoggedIn" Orientation="Vertical">
-                
-                <StackLayout Orientation="Horizontal" IsVisible="False" Padding="5,10">
-                    <Label Text="Welcome" />
-                    <Label x:Name="lblUserName" />
+            <StackLayout x:Name="slLoggedIn" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Horizontal" Padding="5,10">
+                    <Label Text="Welcome" TextColor="White" />
+                    <Label x:Name="lblUserName" TextColor="White" />
                 </StackLayout>
 
-                <ListView x:Name="lvInventory" ItemSelected="InventoryList_ItemSelected">
+                <ListView x:Name="lvInventory" ItemSelected="InventoryList_ItemSelected" VerticalOptions="CenterAndExpand" SeparatorColor="IndianRed">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Name}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                
+
+                <Label x:Name="lblActivityStatus" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+
             </StackLayout>
             
-            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-            
-            <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="btnSignInSignOut_Clicked"  VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="btnSignInSignOut_Clicked" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="IndianRed" />
             
         </StackLayout>
         
