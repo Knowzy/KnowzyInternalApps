@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Knowzy.Xamarin.Android</RootNamespace>
-    <AssemblyName>UserDetailsClient.Droid</AssemblyName>
+    <AssemblyName>Microsoft.Knowzy.Xamarin.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>

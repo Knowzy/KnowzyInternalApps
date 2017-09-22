@@ -1,0 +1,10 @@
+﻿[
+  {
+    "platform": "windows_universal",
+    "application": "0e9426a1-0341-4e86-a33c-4f4c5c02ba12_rkjxvw9zmwpp0"
+  },
+  {
+    "platform": "android",
+    "application": "microsoft.knowzy.xamarin.android"
+  }
+] 
