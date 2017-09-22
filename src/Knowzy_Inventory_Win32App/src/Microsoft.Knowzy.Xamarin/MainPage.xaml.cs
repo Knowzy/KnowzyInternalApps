@@ -32,7 +32,7 @@ namespace Microsoft.Knowzy.Xamarin
 
         private async void InventoryList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            lblActivityStatus.Text = await UserActivityService.Current.RecordInventoryUserActivityAsync(e.SelectedItem as InventoryModel);
+            lblActivityStatus.Text = await UserActivityService.Current.RecordInventoryActivityAndHistoryItemAsync(e.SelectedItem as InventoryModel);
         }
 
         private async void btnSignInSignOut_Clicked(object sender, EventArgs e)

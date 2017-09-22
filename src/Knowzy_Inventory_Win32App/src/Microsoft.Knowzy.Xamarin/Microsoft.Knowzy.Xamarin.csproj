@@ -38,6 +38,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Model\Activity.cs" />
+    <Compile Include="Model\HistoryItem.cs" />
     <Compile Include="Model\InventoryModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

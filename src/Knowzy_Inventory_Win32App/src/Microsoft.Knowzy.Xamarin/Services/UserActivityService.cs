@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graph;
+using Microsoft.Knowzy.Xamarin;
 using Microsoft.Knowzy.Xamarin.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -30,7 +31,7 @@ namespace Microsoft.Knowzy.Xamarin.Services
 
         public static UserActivityService Current => current ?? (current = new UserActivityService());
 
-        public async Task<string> RecordInventoryUserActivityAsync(InventoryModel model)
+        public async Task<string> RecordInventoryActivityAndHistoryItemAsync(InventoryModel model)
         {
             var appActivityId = string.Concat(APP_ITEM_REDIRECT, model.InventoryId);
 
@@ -45,37 +46,87 @@ namespace Microsoft.Knowzy.Xamarin.Services
             string activitiesUrl = App.GraphClient.Me.AppendSegmentToRequestUrl("activities");
             string activitiesUrlWithId = string.Concat(activitiesUrl, "/", WebUtility.UrlEncode(model.InventoryId));
 
-            var status = await CreateOrUpdateActivity(activity, activitiesUrlWithId);
-            
-            switch(status)
+            var activityEndPointId = await CreateOrUpdateActivity(activity, activitiesUrlWithId);
+
+            var historyId = Guid.NewGuid().ToString();
+
+            HistoryItem historyItem = new HistoryItem
             {
-                case HttpStatusCode.OK:
-                    return $"Activity Updated for {model.Name}.";
-                case HttpStatusCode.Created:
-                    return $"Activity Created for {model.Name}.";
-                default:
-                    return $"Unknown or failed activity request for {model.Name}.";
-            }
+                StartedDateTime = DateTime.UtcNow,
+                LastActiveDateTime = DateTime.UtcNow
+            };
+
+            string historyUrlWithId = string.Concat(activitiesUrl, "/", activityEndPointId, "/historyItems/", historyId);
+
+            var historyEndPointId = await CreateOrUpdateHistoryItem(historyItem, historyUrlWithId);
+
+            return "Checkpoint created/updated";
         }
 
-        private async Task<HttpStatusCode> CreateOrUpdateActivity(Activity activity, string activitiesUrlWithId)
+        private async Task<string> CreateOrUpdateActivity(Activity activity, string activitiesUrlWithId)
         {
-            List<Activity> list = new List<Activity>();
-            list.Add(activity);
+            var response = await CreateCustomGraphRequest(activity, activitiesUrlWithId);
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, activitiesUrlWithId);
+            // we need to pull the activity Id off of the response headers for now - we should be getting it back in the response body
+            var id = response?.Headers?.Location?.Segments?[4];
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    Debug.WriteLine($"Activity Updated for {id}");
+                    break;
+                case HttpStatusCode.Created:
+                    Debug.WriteLine($"Activity Created for {id}");
+                    break;
+            }
+
+            return id;
+        }
+
+        private async Task<string> CreateOrUpdateHistoryItem(HistoryItem historyItem, string historyUrlWithId)
+        {
+            var response = await CreateCustomGraphRequest(historyItem, historyUrlWithId);
+
+            // we need to pull the historyItem Id off of the response headers for now - we should be getting it back in the response body
+            var id = response?.Headers?.Location?.Segments?[6];
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    Debug.WriteLine($"HistoryItem Updated for {id}");
+                    break;
+                case HttpStatusCode.Created:
+                    Debug.WriteLine($"HistoryItem Created for {id}");
+                    break;
+            }
+
+            return id;
+        }
+
+        private async Task<HttpResponseMessage> CreateCustomGraphRequest<T>(T item, string customUrl)
+        {
+            List<T> containerList = new List<T> { item };
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, customUrl);
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver(), NullValueHandling = NullValueHandling.Ignore };
-            string activityJson = JsonConvert.SerializeObject(list, settings);
-            var stringContent = new StringContent(activityJson, Encoding.UTF8, "text/json");
+            string itemJson = JsonConvert.SerializeObject(containerList, settings);
+            var stringContent = new StringContent(itemJson, Encoding.UTF8, "text/json");
 
             request.Content = stringContent;
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthenticationService.Current.TokenForUser);
 
-            var response = await App.GraphClient.HttpProvider.SendAsync(request);
+            HttpResponseMessage response = null;
+            try
+            {
+                response = await App.GraphClient.HttpProvider.SendAsync(request);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw ex;
+            }
 
-            response.EnsureSuccessStatusCode();
-
-            return response.StatusCode;
+            return response;
         }
     }
 }

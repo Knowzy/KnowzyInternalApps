@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="0e9426a1-0341-4e86-a33c-4f4c5c02ba12" Publisher="CN=cbarker" Version="1.0.2.0" />
+  <Identity Name="0e9426a1-0341-4e86-a33c-4f4c5c02ba12" Publisher="CN=cbarker" Version="1.0.3.0" />
   <mp:PhoneIdentity PhoneProductId="0e9426a1-0341-4e86-a33c-4f4c5c02ba12" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Microsoft.Knowzy.UWP</DisplayName>
