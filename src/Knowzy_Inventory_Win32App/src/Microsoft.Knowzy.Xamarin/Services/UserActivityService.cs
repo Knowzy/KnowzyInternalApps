@@ -18,9 +18,6 @@ namespace Microsoft.Knowzy.Xamarin.Services
 {
     public class UserActivityService
     {
-        private const string WEB_ROOT = "https://microsoftknowzyweb20170922113924.azurewebsites.net";
-        private const string APP_ITEM_REDIRECT = "item?id=";
-
         private UserActivityService()
         {
 
@@ -32,14 +29,14 @@ namespace Microsoft.Knowzy.Xamarin.Services
 
         public async Task<string> RecordInventoryActivityAndHistoryItemAsync(InventoryModel model)
         {
-            var appActivityId = string.Concat(APP_ITEM_REDIRECT, model.InventoryId);
+            var appActivityId = string.Concat("item?id=", model.InventoryId);
 
             Activity activity = new Activity
             {
                 AppActivityId = appActivityId,
                 ActivationUrl = $"knowzyinventory:{appActivityId}",
                 VisualElements = new VisualInfo { DisplayText = model.Name },
-                ActivitySourceHost = WEB_ROOT
+                ActivitySourceHost = "https://microsoftknowzyweb20170922113924.azurewebsites.net"
             };
 
             string activitiesUrl = App.GraphClient.Me.AppendSegmentToRequestUrl("activities");
