@@ -40,8 +40,8 @@ namespace Microsoft.Knowzy.UWP
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            dataGridInventory.ItemsSource = InventoryBLL.Current.GetInventory();
-            
+            DataGridInventory.ItemsSource = InventoryBLL.Current.GetInventory();
+            ListViewInventory.ItemsSource = InventoryBLL.Current.GetInventory();
         }
 
         private async void NewInventoryButton_Click(object sender, RoutedEventArgs e)
@@ -63,9 +63,9 @@ namespace Microsoft.Knowzy.UWP
             await editItemView.ShowAsync();
         }
 
-        private async void dataGridInventory_SelectionChanged(object sender, Telerik.UI.Xaml.Controls.Grid.DataGridSelectionChangedEventArgs e)
+        private async void DataGridInventory_SelectionChanged(object sender, Telerik.UI.Xaml.Controls.Grid.DataGridSelectionChangedEventArgs e)
         {
-            var selectedInventory = dataGridInventory.SelectedItem as InventoryRow;
+            var selectedInventory = DataGridInventory.SelectedItem as InventoryRow;
 
             if (selectedInventory != null)
             {
@@ -132,6 +132,18 @@ namespace Microsoft.Knowzy.UWP
             };
 
             await editItemView.ShowAsync();
+        }
+
+        private void GridViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridInventory.Visibility = Visibility.Visible;
+            ListViewInventory.Visibility = Visibility.Collapsed;
+        }
+
+        private void ListViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridInventory.Visibility = Visibility.Collapsed;
+            ListViewInventory.Visibility = Visibility.Visible;
         }
     }
 }

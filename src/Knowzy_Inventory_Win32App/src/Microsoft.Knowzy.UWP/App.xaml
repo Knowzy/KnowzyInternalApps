@@ -9,7 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <Style x:Key="NewOrderButtonStyle" TargetType="Button">
+                    <Style x:Key="NewOrderButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
                         <Setter Property="Background" Value="IndianRed" />
                     </Style>
                 </ResourceDictionary>
@@ -18,14 +18,13 @@
                 <ResourceDictionary x:Key="Default">
                     <AcrylicBrush x:Key="MainAcrylicBrush"
                         BackgroundSource="HostBackdrop"
-                        TintColor="IndianRed"
                         TintOpacity="0.8"
-                        FallbackColor="IndianRed"/>
+                        />
 
                     <AcrylicBrush x:Key="NewOrderAcrylicBrush"
                         BackgroundSource="Backdrop"
                         TintColor="IndianRed"
-                        TintOpacity="0.01"
+                        TintOpacity="0.6"
                         FallbackColor="IndianRed"/>
                 </ResourceDictionary>
 
@@ -40,14 +39,13 @@
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush x:Key="MainAcrylicBrush"
                         BackgroundSource="HostBackdrop"
-                        TintColor="IndianRed"
                         TintOpacity="0.8"
-                        FallbackColor="IndianRed"/>
+                        />
 
                     <AcrylicBrush x:Key="NewOrderAcrylicBrush"
                         BackgroundSource="Backdrop"
                         TintColor="IndianRed"
-                        TintOpacity="0.01"
+                        TintOpacity="0.6"
                         FallbackColor="IndianRed"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>

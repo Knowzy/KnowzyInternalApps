@@ -102,6 +102,7 @@
     <Compile Include="EditItemView.xaml.cs">
       <DependentUpon>EditItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageSourceToPathConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -151,6 +152,13 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Images\blacknose400x300.png" />
+    <Content Include="Images\clown.png" />
+    <Content Include="Images\Frabicnose400x300.png" />
+    <Content Include="Images\Kidnose400x300.png" />
+    <Content Include="Images\Oversizenose400x300.png" />
+    <Content Include="Images\Purplenose400x300.png" />
+    <Content Include="Images\Rainbownose400x300.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

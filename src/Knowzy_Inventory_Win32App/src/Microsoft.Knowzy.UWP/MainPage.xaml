@@ -7,16 +7,35 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwptkControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:telerikGrid="using:Telerik.UI.Xaml.Controls.Grid"
+    xmlns:converters="using:Microsoft.Knowzy.UWP.Helpers"
     mc:Ignorable="d">
+    <Page.Resources>
+        <converters:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
+        <DataTemplate x:Key="ListItemTemplate">
+            <Grid Background="{ThemeResource MainAcrylicBrush}">
+                <ParallaxView Source="{Binding ElementName=ListViewInventory}" VerticalShift="20">
+                    <Image Source="{Binding ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" Stretch="Uniform" MaxHeight="200" MaxWidth="200" />
+                </ParallaxView>
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <RelativePanel Background="{ThemeResource MainAcrylicBrush}">
         
         <uwptkControls:Menu x:Name="TopMenu" AllowTooltip="True" Orientation="Horizontal" Margin="0,35,0,0">
-            <uwptkControls:MenuItem Header="File" Foreground="Yellow">
+            <uwptkControls:MenuItem Header="File">
                 <MenuFlyoutItem x:Name="NewInventoryButton" uwptkControls:Menu.InputGestureText="Ctrl+Shift+N" Text="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
             </uwptkControls:MenuItem>
+            <uwptkControls:MenuItem Header="View">
+                <MenuFlyoutItem x:Name="GridViewButton" Text="Grid view" ToolTipService.ToolTip="Grid view" Click="GridViewButton_Click" />
+                <MenuFlyoutItem x:Name="ListViewButton" Text="List view" ToolTipService.ToolTip="List view" Click="ListViewButton_Click" />
+            </uwptkControls:MenuItem>
         </uwptkControls:Menu>
-
-        <telerikGrid:RadDataGrid x:Name="dataGridInventory" RelativePanel.Below="TopMenu" SelectionMode="Single" Margin="25" SelectionChanged="dataGridInventory_SelectionChanged" />
         
+        <Grid x:Name="GridDataContainer" RelativePanel.Below="TopMenu" Margin="25" RelativePanel.AlignHorizontalCenterWithPanel="True">
+            <telerikGrid:RadDataGrid x:Name="DataGridInventory" SelectionMode="Single" SelectionChanged="DataGridInventory_SelectionChanged" />
+            <ListView x:Name="ListViewInventory" Visibility="Collapsed" ItemTemplate="{StaticResource ListItemTemplate}" />
+        </Grid>
+            
     </RelativePanel>
 </Page>
