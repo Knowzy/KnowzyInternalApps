@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserActivityService.cs" />
+    <Compile Include="ViewModels\ChartData.cs" />
     <Compile Include="ViewModels\EditItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

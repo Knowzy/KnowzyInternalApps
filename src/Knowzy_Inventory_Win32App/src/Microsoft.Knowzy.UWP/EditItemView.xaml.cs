@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,6 +26,16 @@ namespace Microsoft.Knowzy.UWP
         public EditItemView()
         {
             this.InitializeComponent();
+            Loaded += EditItemView_Loaded;
+        }
+
+        private void EditItemView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ConnectedAnimation noseAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("nose");
+            if (noseAnimation != null)
+            {
+                noseAnimation.TryStart(HeaderImage);
+            }
         }
 
         private EditItemViewModel editItemViewModel;
@@ -43,10 +54,12 @@ namespace Microsoft.Knowzy.UWP
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("nose", HeaderImage);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("nose", HeaderImage);
         }
 
         private void OnPropertyChanged(string propertyName)

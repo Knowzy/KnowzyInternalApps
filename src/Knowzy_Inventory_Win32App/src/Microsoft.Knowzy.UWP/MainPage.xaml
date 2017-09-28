@@ -7,35 +7,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwptkControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:telerikGrid="using:Telerik.UI.Xaml.Controls.Grid"
-    xmlns:converters="using:Microsoft.Knowzy.UWP.Helpers"
+    xmlns:telerikChart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:helpers="using:Microsoft.Knowzy.UWP.Helpers"
     mc:Ignorable="d">
     <Page.Resources>
-        <converters:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
-        <DataTemplate x:Key="ListItemTemplate">
-            <Grid Background="{ThemeResource MainAcrylicBrush}">
-                <ParallaxView Source="{Binding ElementName=ListViewInventory}" VerticalShift="20">
-                    <Image Source="{Binding ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" Stretch="Uniform" MaxHeight="200" MaxWidth="200" />
-                </ParallaxView>
-                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" />
-            </Grid>
-        </DataTemplate>
+        <helpers:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
     </Page.Resources>
-    <RelativePanel Background="{ThemeResource MainAcrylicBrush}">
-        
-        <uwptkControls:Menu x:Name="TopMenu" AllowTooltip="True" Orientation="Horizontal" Margin="0,35,0,0">
-            <uwptkControls:MenuItem Header="File">
-                <MenuFlyoutItem x:Name="NewInventoryButton" uwptkControls:Menu.InputGestureText="Ctrl+Shift+N" Text="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
-            </uwptkControls:MenuItem>
-            <uwptkControls:MenuItem Header="View">
-                <MenuFlyoutItem x:Name="GridViewButton" Text="Grid view" ToolTipService.ToolTip="Grid view" Click="GridViewButton_Click" />
-                <MenuFlyoutItem x:Name="ListViewButton" Text="List view" ToolTipService.ToolTip="List view" Click="ListViewButton_Click" />
-            </uwptkControls:MenuItem>
-        </uwptkControls:Menu>
-        
-        <Grid x:Name="GridDataContainer" RelativePanel.Below="TopMenu" Margin="25" RelativePanel.AlignHorizontalCenterWithPanel="True">
-            <telerikGrid:RadDataGrid x:Name="DataGridInventory" SelectionMode="Single" SelectionChanged="DataGridInventory_SelectionChanged" />
-            <ListView x:Name="ListViewInventory" Visibility="Collapsed" ItemTemplate="{StaticResource ListItemTemplate}" />
+    <RelativePanel>
+
+        <Grid x:Name="GridHeader" Background="{ThemeResource MainAcrylicBrush}" Height="100" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+            <CommandBar x:Name="TopMenu" Background="{ThemeResource MainAcrylicBrush}" Margin="0,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" DefaultLabelPosition="Right">
+                <AppBarButton x:Name="NewInventoryButton" Icon="NewWindow" Label="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
+                <AppBarButton x:Name="EditInventoryButton" Icon="Edit" Label="Edit" ToolTipService.ToolTip="Edit" Click="EditInventoryButton_Click" />
+                <AppBarToggleButton x:Name="ToggleViewButton" Icon="View" ToolTipService.ToolTip="View" Label="Toggle View" Click="ToggleViewButton_Click" />
+                <AppBarButton x:Name="HelpButton" Icon="Help" Label="About" ToolTipService.ToolTip="About" Click="HelpButton_Click" />
+            </CommandBar>
+            <Image x:Name="SelectedImage" VerticalAlignment="Center" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,35,0,0" Stretch="Uniform" Source="{Binding ElementName=DataGridInventory, Path=SelectedItem.ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" />
         </Grid>
+
+        <Grid x:Name="GridDataContainer" RelativePanel.Below="GridHeader" Margin="25" RelativePanel.AlignHorizontalCenterWithPanel="True">
+
+            <telerikGrid:RadDataGrid x:Name="DataGridInventory" SelectionMode="Single" />
             
+            <telerikChart:RadCartesianChart x:Name="RadChart" Visibility="Collapsed">
+                <telerikChart:RadCartesianChart.HorizontalAxis>
+                    <telerikChart:CategoricalAxis/>
+                </telerikChart:RadCartesianChart.HorizontalAxis>
+                <telerikChart:RadCartesianChart.VerticalAxis>
+                    <telerikChart:LinearAxis/>
+                </telerikChart:RadCartesianChart.VerticalAxis>
+                <telerikChart:BarSeries x:Name="RadLineSeries">
+                    <telerikChart:BarSeries.CategoryBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Category" />
+                    </telerikChart:BarSeries.CategoryBinding>
+                    <telerikChart:BarSeries.ValueBinding>
+                        <telerikChart:PropertyNameDataPointBinding PropertyName="Value" />
+                    </telerikChart:BarSeries.ValueBinding>
+                </telerikChart:BarSeries>
+            </telerikChart:RadCartesianChart>
+        </Grid>
+
     </RelativePanel>
 </Page>

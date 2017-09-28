@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerikData="using:Telerik.UI.Xaml.Controls.Data"
+    xmlns:helpers="using:Microsoft.Knowzy.UWP.Helpers"
     mc:Ignorable="d"
     Title="New / Edit Inventory Item"
     PrimaryButtonText="Save"
@@ -15,10 +16,20 @@
     PrimaryButtonStyle="{StaticResource NewOrderButtonStyle}"
     SecondaryButtonStyle="{StaticResource NewOrderButtonStyle}"
     Background="{ThemeResource NewOrderAcrylicBrush}">
-    <Grid>
-        <ScrollViewer x:Name="FormScrollViewer" Background="Transparent">
-            <telerikData:RadDataForm x:Name="InventoryDataForm" Item="{x:Bind EditItemViewModel, Mode=TwoWay}" />
+    <ContentDialog.Resources>
+        <helpers:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
+    </ContentDialog.Resources>
+    <RelativePanel>
+        <Image x:Name="HeaderImage" Source="{x:Bind EditItemViewModel.ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" Stretch="Uniform" Height="100" Width="100" HorizontalAlignment="Center" />
+        <ScrollViewer x:Name="FormScrollViewer" Background="Transparent" RelativePanel.Below="HeaderImage" >
+            <StackPanel>
+                <telerikData:RadDataForm x:Name="InventoryDataForm" Item="{x:Bind EditItemViewModel, Mode=TwoWay}" />
+                <StackPanel Orientation="Horizontal" Background="LightGray" Margin="0,10,0,10">
+                    <TextBlock Text="Signature" />
+                    <InkCanvas x:Name="InkCanvas" MinHeight="100" MinWidth="350" />
+                </StackPanel>
+            </StackPanel>
         </ScrollViewer>
-    </Grid>
+    </RelativePanel>
     
 </ContentDialog>

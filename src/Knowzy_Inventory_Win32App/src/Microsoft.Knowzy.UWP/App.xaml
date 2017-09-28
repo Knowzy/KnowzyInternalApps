@@ -23,9 +23,7 @@
 
                     <AcrylicBrush x:Key="NewOrderAcrylicBrush"
                         BackgroundSource="Backdrop"
-                        TintColor="IndianRed"
-                        TintOpacity="0.6"
-                        FallbackColor="IndianRed"/>
+                        TintOpacity="0.6" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="HighContrast">
@@ -39,14 +37,11 @@
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush x:Key="MainAcrylicBrush"
                         BackgroundSource="HostBackdrop"
-                        TintOpacity="0.8"
-                        />
+                        TintOpacity="0.8" />
 
                     <AcrylicBrush x:Key="NewOrderAcrylicBrush"
                         BackgroundSource="Backdrop"
-                        TintColor="IndianRed"
-                        TintOpacity="0.6"
-                        FallbackColor="IndianRed"/>
+                        TintOpacity="0.6" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
