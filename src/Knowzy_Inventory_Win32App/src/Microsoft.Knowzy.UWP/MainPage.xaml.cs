@@ -46,7 +46,7 @@ namespace Microsoft.Knowzy.UWP
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            _inventoryDataTable= InventoryBLL.Current.GetInventory();
+            _inventoryDataTable = InventoryBLL.Current.GetInventory();
             DataGridInventory.ItemsSource = _inventoryDataTable;
 
             _chartData = (from i in _inventoryDataTable
@@ -115,11 +115,6 @@ namespace Microsoft.Knowzy.UWP
             };
 
             await editItemView.ShowAsync();
-        }
-
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void ToggleViewButton_Click(object sender, RoutedEventArgs e)

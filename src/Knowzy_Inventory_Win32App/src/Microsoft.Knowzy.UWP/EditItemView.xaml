@@ -13,15 +13,15 @@
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
-    PrimaryButtonStyle="{StaticResource NewOrderButtonStyle}"
-    SecondaryButtonStyle="{StaticResource NewOrderButtonStyle}"
+    PrimaryButtonStyle="{StaticResource ButtonRevealStyle}"
+    SecondaryButtonStyle="{StaticResource ButtonRevealStyle}"
     Background="{ThemeResource NewOrderAcrylicBrush}">
     <ContentDialog.Resources>
         <helpers:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
     </ContentDialog.Resources>
     <RelativePanel>
         <Image x:Name="HeaderImage" Source="{x:Bind EditItemViewModel.ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" Stretch="Uniform" Height="100" Width="100" HorizontalAlignment="Center" />
-        <ScrollViewer x:Name="FormScrollViewer" Background="Transparent" RelativePanel.Below="HeaderImage" >
+        <ScrollViewer x:Name="FormScrollViewer" RelativePanel.Below="HeaderImage" >
             <StackPanel>
                 <telerikData:RadDataForm x:Name="InventoryDataForm" Item="{x:Bind EditItemViewModel, Mode=TwoWay}" />
                 <StackPanel Orientation="Horizontal" Background="LightGray" Margin="0,10,0,10">
@@ -31,5 +31,4 @@
             </StackPanel>
         </ScrollViewer>
     </RelativePanel>
-    
 </ContentDialog>

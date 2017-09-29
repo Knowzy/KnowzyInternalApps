@@ -20,15 +20,17 @@
                 <AppBarButton x:Name="NewInventoryButton" Icon="NewWindow" Label="New" ToolTipService.ToolTip="New" Click="NewInventoryButton_Click" />
                 <AppBarButton x:Name="EditInventoryButton" Icon="Edit" Label="Edit" ToolTipService.ToolTip="Edit" Click="EditInventoryButton_Click" />
                 <AppBarToggleButton x:Name="ToggleViewButton" Icon="View" ToolTipService.ToolTip="View" Label="Toggle View" Click="ToggleViewButton_Click" />
-                <AppBarButton x:Name="HelpButton" Icon="Help" Label="About" ToolTipService.ToolTip="About" Click="HelpButton_Click" />
+                <AppBarButton x:Name="HelpButton" Icon="Help" Label="About" ToolTipService.ToolTip="About" />
             </CommandBar>
-            <Image x:Name="SelectedImage" VerticalAlignment="Center" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,35,0,0" Stretch="Uniform" Source="{Binding ElementName=DataGridInventory, Path=SelectedItem.ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" />
+            <Image x:Name="SelectedImage" HorizontalAlignment="Right" 
+                   Height="50" Width="50" Stretch="Uniform" VerticalAlignment="Bottom"
+                   Source="{Binding ElementName=DataGridInventory, Path=SelectedItem.ImageSource, Converter={StaticResource ImageSourceToPathConverter}}" />
         </Grid>
 
         <Grid x:Name="GridDataContainer" RelativePanel.Below="GridHeader" Margin="25" RelativePanel.AlignHorizontalCenterWithPanel="True">
 
             <telerikGrid:RadDataGrid x:Name="DataGridInventory" SelectionMode="Single" />
-            
+           
             <telerikChart:RadCartesianChart x:Name="RadChart" Visibility="Collapsed">
                 <telerikChart:RadCartesianChart.HorizontalAxis>
                     <telerikChart:CategoricalAxis/>
