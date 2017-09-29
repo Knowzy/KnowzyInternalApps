@@ -29,35 +29,9 @@ namespace Microsoft.Knowzy.Xamarin.Services
 
         public async Task<string> RecordInventoryActivityAndHistoryItemAsync(InventoryModel model)
         {
-            var appActivityId = string.Concat("item?id=", model.InventoryId);
 
-            Activity activity = new Activity
-            {
-                AppActivityId = appActivityId,
-                ActivationUrl = $"knowzyinventory:{appActivityId}",
-                VisualElements = new VisualInfo { DisplayText = model.Name },
-                ActivitySourceHost = "https://microsoftknowzyweb20170922113924.azurewebsites.net"
-            };
-
-            string activitiesUrl = App.GraphClient.Me.AppendSegmentToRequestUrl("activities");
-            string activitiesUrlWithId = string.Concat(activitiesUrl, "/", WebUtility.UrlEncode(model.InventoryId));
-
-            var activityEndPointId = await CreateOrUpdateActivity(activity, activitiesUrlWithId);
-
-            var historyId = Guid.NewGuid().ToString();
-
-            HistoryItem historyItem = new HistoryItem
-            {
-                StartedDateTime = DateTime.UtcNow,
-                LastActiveDateTime = DateTime.UtcNow,
-                UserTimezone = "America/Los_Angeles"
-            };
-
-            string historyUrlWithId = string.Concat(activitiesUrl, "/", activityEndPointId, "/historyItems/", historyId);
-
-            var historyEndPointId = await CreateOrUpdateHistoryItem(historyItem, historyUrlWithId);
-
-            return "Checkpoint created/updated";
+            //return "Checkpoint created/updated";
+            return string.Empty;
         }
 
         private async Task<string> CreateOrUpdateActivity(Activity activity, string activitiesUrlWithId)

@@ -31,11 +31,7 @@ namespace Microsoft.Knowzy.UWP
 
         private void EditItemView_Loaded(object sender, RoutedEventArgs e)
         {
-            ConnectedAnimation noseAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("nose");
-            if (noseAnimation != null)
-            {
-                noseAnimation.TryStart(HeaderImage);
-            }
+
         }
 
         private EditItemViewModel editItemViewModel;
@@ -54,12 +50,12 @@ namespace Microsoft.Knowzy.UWP
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("nose", HeaderImage);
+
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("nose", HeaderImage);
+
         }
 
         private void OnPropertyChanged(string propertyName)

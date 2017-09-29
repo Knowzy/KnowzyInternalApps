@@ -6,24 +6,7 @@
     RequestedTheme="Light">
 
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
-                    <AcrylicBrush x:Key="MainAcrylicBrush" BackgroundSource="HostBackdrop" TintOpacity="0.8" />
-                    <AcrylicBrush x:Key="NewOrderAcrylicBrush" BackgroundSource="Backdrop" TintOpacity="0.6" />
-                </ResourceDictionary>
 
-                <ResourceDictionary x:Key="HighContrast">
-                    <SolidColorBrush x:Key="MainAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}"/>
-                    <SolidColorBrush x:Key="NewOrderAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}"/>
-                </ResourceDictionary>
-
-                <ResourceDictionary x:Key="Light">
-                    <AcrylicBrush x:Key="MainAcrylicBrush" BackgroundSource="HostBackdrop" TintOpacity="0.8" />
-                    <AcrylicBrush x:Key="NewOrderAcrylicBrush" BackgroundSource="Backdrop" TintOpacity="0.6" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
     </Application.Resources>
     
 </Application>

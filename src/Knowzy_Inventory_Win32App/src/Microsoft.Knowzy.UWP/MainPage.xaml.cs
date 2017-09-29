@@ -71,49 +71,6 @@ namespace Microsoft.Knowzy.UWP
                 EditItemViewModel = _editItemViewModel
             };
 
-            await UserActivityService.Current.RecordInventoryUserActivity(_editItemViewModel);
-
-            await editItemView.ShowAsync();
-        }
-
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            
-            var parameters = e.Parameter.ToString().Split("id=");
-
-            if (parameters.Length <= 1) return;
-
-            bool isNewItem = false;
-
-            InventoryRow inventoryRow = null;
-
-            if (!isNewItem)
-            {
-                inventoryRow = InventoryBLL.Current.GetInventory().FindById(parameters[1]);
-            }
-
-            isNewItem = (inventoryRow == null);
-
-            _editItemViewModel = new EditItemViewModel();
-
-            if (!isNewItem && inventoryRow != null)
-            {
-                _editItemViewModel.Id = inventoryRow.Id;
-                _editItemViewModel.Engineer = inventoryRow.Engineer;
-                _editItemViewModel.Name = inventoryRow.Name;
-                _editItemViewModel.RawMaterial = inventoryRow.RawMaterial;
-                _editItemViewModel.DevelopmentStartDate = inventoryRow.DevelopmentStartDate;
-                _editItemViewModel.ExpectedCompletionDate = inventoryRow.ExpectedCompletionDate;
-                _editItemViewModel.Notes = inventoryRow.Notes;
-                _editItemViewModel.ImageSource = inventoryRow.ImageSource;
-            }
-
-            var editItemView = new EditItemView
-            {
-                EditItemViewModel = _editItemViewModel,
-            };
-
             await editItemView.ShowAsync();
         }
 
@@ -121,7 +78,6 @@ namespace Microsoft.Knowzy.UWP
         {
             DataGridInventory.Visibility = DataGridInventory.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             RadChart.Visibility = RadChart.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-
         }
 
         private async void EditInventoryButton_Click(object sender, RoutedEventArgs e)
@@ -146,21 +102,6 @@ namespace Microsoft.Knowzy.UWP
                 var editItemView = new EditItemView
                 {
                     EditItemViewModel = _editItemViewModel
-                };
-
-                await UserActivityService.Current.RecordInventoryUserActivity(_editItemViewModel);
-
-                ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("nose", SelectedImage);
-                SelectedImage.Visibility = Visibility.Collapsed;
-
-                editItemView.Closing += (s, ev) => 
-                {
-                    SelectedImage.Visibility = Visibility.Visible;
-                    ConnectedAnimation noseAnimation = ConnectedAnimationService.GetForCurrentView().GetAnimation("nose");
-                    if (noseAnimation != null)
-                    {
-                        noseAnimation.TryStart(SelectedImage);
-                    }
                 };
 
                 await editItemView.ShowAsync();
