@@ -50,9 +50,9 @@ namespace Microsoft.Knowzy.WPF
             builder.RegisterType<KanbanViewModel>().SingleInstance();
             builder.RegisterType<ListProductsViewModel>().SingleInstance();
 
-            builder.RegisterType<JsonDataProvider>().As<IDataProvider>().SingleInstance();
+            //builder.RegisterType<JsonDataProvider>().As<IDataProvider>().SingleInstance();
             // TODO: un-comment the following line to switch to SQL Server instance
-            // builder.RegisterType<SqlDataProvider>().As<IDataProvider>().SingleInstance();
+            builder.RegisterType<SqlDataProvider>().As<IDataProvider>().SingleInstance();
 
             builder.RegisterType<ConfigurationService>().As<IConfigurationService>().SingleInstance();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();
