@@ -5,7 +5,6 @@
     xmlns:local="using:Microsoft.Knowzy.UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:telerikData="using:Telerik.UI.Xaml.Controls.Data"
     xmlns:helpers="using:Microsoft.Knowzy.UWP.Helpers"
     mc:Ignorable="d"
     Title="New / Edit Inventory Item"

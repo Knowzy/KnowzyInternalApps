@@ -1,6 +1,5 @@
 ﻿using Microsoft.Knowzy.Domain.Enums;
 using Microsoft.Knowzy.NET.BLL;
-using Microsoft.Knowzy.UWP.Services;
 using Microsoft.Knowzy.UWP.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -11,7 +11,7 @@
     </Page.Resources>
     <RelativePanel>
 
-        <Grid x:Name="GridHeader" Background="{ThemeResource MainAcrylicBrush}" Height="100" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+        <Grid x:Name="GridHeader" Height="100" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
 
         </Grid>
 
