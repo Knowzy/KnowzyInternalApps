@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Knowzy.WPF", "src\Microsoft.Knowzy.WPF\Microsoft.Knowzy.WPF.csproj", "{A5C6D61A-0FD5-48F8-B574-4B46D188550B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Knowzy.WPF", "src\Microsoft.Knowzy.WPF\Microsoft.Knowzy.WPF.csproj", "{F7E7A486-5C32-4D1B-B96F-A68871560430}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{494D40EA-694C-49FA-8347-840B8BF1BAD6}"
 EndProject
