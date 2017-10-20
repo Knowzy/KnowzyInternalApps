@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:Microsoft.Knowzy.Xamarin;assembly=Microsoft.Knowzy.Xamarin"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Microsoft.Knowzy.Xamarin.MainPage">
+    <ContentPage.Content>
+        
+        <StackLayout>
+            
+            <Label Text="Knowzy Mobile - Inventory" VerticalOptions="Start" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
+
+            <StackLayout x:Name="slLoggedIn" Orientation="Vertical" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Horizontal" Padding="5,10">
+                    <Label Text="Welcome" TextColor="White" />
+                    <Label x:Name="lblUserName" TextColor="White" />
+                </StackLayout>
+
+                <ListView x:Name="lvInventory" ItemSelected="InventoryList_ItemSelected" VerticalOptions="CenterAndExpand" SeparatorColor="IndianRed">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label x:Name="lblActivityStatus" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+
+            </StackLayout>
+            
+            <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="btnSignInSignOut_Clicked" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="IndianRed" />
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

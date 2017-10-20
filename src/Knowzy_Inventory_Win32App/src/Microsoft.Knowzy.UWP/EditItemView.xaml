@@ -1,0 +1,21 @@
+﻿<ContentDialog
+    x:Class="Microsoft.Knowzy.UWP.EditItemView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Microsoft.Knowzy.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:Microsoft.Knowzy.UWP.Helpers"
+    mc:Ignorable="d"
+    Title="New / Edit Inventory Item"
+    PrimaryButtonText="Save"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    <ContentDialog.Resources>
+        <helpers:ImageSourceToPathConverter x:Key="ImageSourceToPathConverter" />
+    </ContentDialog.Resources>
+    <RelativePanel>
+
+    </RelativePanel>
+</ContentDialog>
