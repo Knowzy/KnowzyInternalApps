@@ -7,19 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. WebApp", "1. WebApp", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{1C09AF31-89F7-4A97-8748-A4CCB64065CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.WebApp", "src\1. WebApp\Microsoft.Knowzy.WebApp\Microsoft.Knowzy.WebApp.csproj", "{F902C379-9577-4E7C-96AC-17A53461EE8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.WebApp", "src\1. WebApp\Microsoft.Knowzy.WebApp\Microsoft.Knowzy.WebApp.csproj", "{F033636F-E7D0-4D3B-A7D9-405A54F4BEB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{1E29BA0E-66F1-4F2B-B1EB-1F5DD0C20205}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Domain", "src\3. Domain\Microsoft.Knowzy.Domain\Microsoft.Knowzy.Domain.csproj", "{3C89FCE7-6EE8-419B-AD9C-BDE435336B12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Domain", "src\3. Domain\Microsoft.Knowzy.Domain\Microsoft.Knowzy.Domain.csproj", "{64983725-BA34-404B-A77F-E84B7E466356}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Models", "src\3. Domain\Microsoft.Knowzy.Models\Microsoft.Knowzy.Models.csproj", "{13D3CB1B-0091-4B06-A50A-C735F54C528B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Models", "src\3. Domain\Microsoft.Knowzy.Models\Microsoft.Knowzy.Models.csproj", "{14A7EF98-48FC-4FB7-A55A-78942F3AC8BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{71F90FF4-2E48-4332-B60B-4FD4D4973C21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micrososft.Knowzy.Repositories.Contracts", "src\2. Services\Repositories\Micrososft.Knowzy.Repositories.Contracts\Micrososft.Knowzy.Repositories.Contracts.csproj", "{3752C88C-3330-4C55-833B-3556370140BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micrososft.Knowzy.Repositories.Contracts", "src\2. Services\Repositories\Micrososft.Knowzy.Repositories.Contracts\Micrososft.Knowzy.Repositories.Contracts.csproj", "{B511969F-B318-446A-BC7C-91BEBFEFF945}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Repositories.Core", "src\2. Services\Repositories\Microsoft.Knowzy.Repositories.Core\Microsoft.Knowzy.Repositories.Core.csproj", "{FFED8200-0BD4-4B90-829D-1766ADA7EB65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Knowzy.Repositories.Core", "src\2. Services\Repositories\Microsoft.Knowzy.Repositories.Core\Microsoft.Knowzy.Repositories.Core.csproj", "{E4EF1245-1F02-475C-BF10-8344DA1D2F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
