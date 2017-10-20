@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5C6D61A-0FD5-48F8-B574-4B46D188550B}</ProjectGuid>
+    <ProjectGuid>{F640D425-59B5-4197-B15F-96B36DB21D20}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Microsoft.Knowzy.WPF</RootNamespace>
     <AssemblyName>Microsoft.Knowzy.WPF</AssemblyName>
